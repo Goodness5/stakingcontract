@@ -30,6 +30,7 @@ async function main() {
   const Staking = await ethers.getContractFactory("StakERC20");
   const staking = await Staking.deploy(tokenaddress, undeadAddress);
   await staking.deployed();
+  
   console.log(`Staking contract deployed to ${staking.address}`);
 
 
