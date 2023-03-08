@@ -15,7 +15,7 @@ contract Undead is ERC20, Ownable {
     constructor(string memory name, string memory symbol) ERC20(name, symbol) {
         _name = "Undead";
         _symbol = "SG";
-        _mint(msg.sender, 10000000);
+        _mint(msg.sender, 1000000000);
     }
 
     function withdrawEther() public onlyOwner {
@@ -30,7 +30,8 @@ contract Undead is ERC20, Ownable {
     IERC20 token = IERC20(tokenAddress);
     uint256 balance = token.balanceOf(address(this));
     require(balance > 0, "Contract has no token balance");
-    require(token.transfer(owner(), balance), "Token transfer to owner failed");
+    bool transfered = token.transfer(owner(), balance);
+    require(transfered, "Token transfer to owner failed");
 }
 
 
