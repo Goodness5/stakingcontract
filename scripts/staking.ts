@@ -5,7 +5,7 @@ async function main() {
   const [owner, holder1, holder2, holder3] = await ethers.getSigners();
   //deploy reward token
   const Token = await ethers.getContractFactory("CVIII");
-  const token = await Token.deploy("web3Bridge", "VIII");
+  const token = await Token.deploy("Superman", "SGK");
   await token.deployed();
 
   const tokenaddress = token.address;

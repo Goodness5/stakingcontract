@@ -7,13 +7,13 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 /// @author The name of the author
 /// @notice Explain to an end user what this does
 /// @dev Explain to a developer any extra details
-contract CVIII is ERC20 {
+contract Superman is ERC20 {
 
     string  _name;
     
     string  _symbol;
     constructor(string memory name, string memory symbol) ERC20(name, symbol){
-        _mint(msg.sender, 10000);
+        _mint(msg.sender, 10000000);
     }
 
     
