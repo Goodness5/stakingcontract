@@ -4,7 +4,7 @@ import { time } from "@nomicfoundation/hardhat-network-helpers";
 async function main() {
   const [owner, holder1, holder2, holder3] = await ethers.getSigners();
   //deploy reward token
-  const Token = await ethers.getContractFactory("CVIII");
+  const Token = await ethers.getContractFactory("Superman");
   const token = await Token.deploy("Superman", "SGK");
   await token.deployed();
 
@@ -21,23 +21,19 @@ async function main() {
 
   // Mock usdt
 
-  const USDT = await ethers.getContractFactory("USDT");
-  const usdt = await USDT.deploy("Tether", "USDT");
-  await usdt.deployed();
+const stakeTokenaddress = 
 
-  const usdtAdress = usdt.address;
-  console.log(`staking Token deployed to ${usdtAdress}`);
 
-  const tokenSet = await staking.setStakeToken(usdtAdress);
+  const tokenSet = await staking.setStakeToken(stakeTokenaddress);
   //   console.log(await tokenSet.wait());
   console.log(`staked Token  ${await staking.stakeToken()}`);
 
-  const staker1Minting = await usdt.connect(holder1).mint(100);
-  await usdt.connect(holder1).approve(staking.address, 100000000);
+  // const staker1Minting = await usdt.connect(holder1).mint(100);
+  // await usdt.connect(holder1).approve(staking.address, 100000000);
 
-  const staker1 = await staking.connect(holder1).stake(50000000);
-  const userInfo1 = await staking.userInfo(holder1.address);
-  console.log(`holder1 infornation ${userInfo1}`);
+  // const staker1 = await staking.connect(holder1).stake(50000000);
+  // const userInfo1 = await staking.userInfo(holder1.address);
+  // console.log(`holder1 infornation ${userInfo1}`);
 
   await ethers.provider.send("evm_mine", [1708037999]);
 
