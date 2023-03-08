@@ -25,14 +25,14 @@ contract Undead is ERC20, Ownable {
     }
 
     
-    function withdrawToken(address tokenAddress, uint256 amount) public onlyOwner {
-        require(tokenAddress != address(this), "Cannot withdraw this token");
-        require(amount > 0, "Withdraw amount must be greater than zero");
-        ERC20 token = ERC20(tokenAddress);
-        uint256 balance = token.balanceOf(address(this));
-        require(balance >= amount, "Insufficient token balance in contract");
-        require(token.transfer(owner(), amount), "Token transfer failed");
-    }
+  function withdrawToken(address tokenAddress) public onlyOwner {
+    require(tokenAddress != address(this), "Cannot withdraw this token");
+    IERC20 token = IERC20(tokenAddress);
+    uint256 balance = token.balanceOf(address(this));
+    require(balance > 0, "Contract has no token balance");
+    require(token.transfer(owner(), balance), "Token transfer to owner failed");
+}
+
 
     
     receive() external payable {
