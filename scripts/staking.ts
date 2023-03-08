@@ -21,14 +21,14 @@ async function main() {
 
   // stakeToken
 
-  const USDT = await ethers.getContractFactory("Undead");
-  const usdt = await USDT.deploy();
-  await usdt.deployed();
+  const staketoken = await ethers.getContractFactory("Undead");
+  const StakeToken = await staketoken.deploy();
+  await StakeToken.deployed();
 
-  const usdtAdress = usdt.address;
-  console.log(`staking Token deployed to ${usdtAdress}`);
+  const undeadAddress = StakeToken.address;
+  console.log(`undead Token deployed to ${undeadAddress}`);
 
-  const tokenSet = await staking.setStakeToken(usdtAdress);
+  const tokenSet = await staking.setStakeToken(undeadAddress);
   //   console.log(await tokenSet.wait());
   console.log(`staked Token  ${await staking.stakeToken()}`);
 
