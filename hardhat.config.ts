@@ -24,6 +24,11 @@ const config: HardhatUserConfig = {
         //@ts-ignore
         accounts: [process.env.PRIVATE_KEY],
       },
+      sepolia: {
+        url: process.env.SEPOLIA_RPC,
+        //@ts-ignore
+        accounts: [process.env.PRIVATE_KEY],
+      },
   },
   etherscan: {
     //@ts-ignore
