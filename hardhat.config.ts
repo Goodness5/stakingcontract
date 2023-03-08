@@ -9,25 +9,23 @@ const config: HardhatUserConfig = {
   solidity: "0.8.17",
 
   networks: {
-    goerli:{
+    goerli: {
       url: process.env.GOERLI_RPC,
       //@ts-ignore
-      accounts: [process.env.PRIVATE_KEY, process.env.PRIVATE_KEY2],
+      accounts: [process.env.PRIVATE_KEY],
     },
 
-      hardhat: {
-        forking: {
-          //@ts-ignore
-          url: process.env.MAINETURL,
-        }
+    hardhat: {
+      forking: {
+        //@ts-ignore
+        url: process.env.MAINETURL,
       },
+    },
   },
   etherscan: {
     //@ts-ignore
     api_key: process.env.ETHERSCAN_API_KEY,
-},
-
-
+  },
 };
 
 export default config;
