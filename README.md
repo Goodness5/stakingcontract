@@ -25,7 +25,7 @@ REWARD_TOKEN: https://goerli.etherscan.io/address/0xDA5AeaC6d3c89c7De2b2aE7c41A9
 
 # SEPOLIA_TESTNET:
 
-STAKING_CONTRACT: https://sepolia.etherscan.io/address/0xADD24771Bcb47b28d85cEfb641ef469bc9E52cf7
+STAKING_CONTRACT: https://sepolia.etherscan.io/address/0xb5B81A928A20070e5E9E888615f018affEbfe8de
 
 UNDEAD_TOKEN: https://sepolia.etherscan.io/address/0x0DB2a8Aa2E2C023Cfb61c617d40162cc9F4c27aB
 
