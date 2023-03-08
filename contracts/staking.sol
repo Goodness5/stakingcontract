@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -9,6 +10,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract StakERC20 is Ownable {
     IERC20 public rewardToken;
     IERC20[] public stakableTokens;
+    IERC20 public SpecialToken;
 
     uint256 constant SECONDS_PER_YEAR = 31536000;
 
@@ -22,30 +24,30 @@ contract StakERC20 is Ownable {
     mapping(address => User) user;
     error tryAgain();
 
-    constructor(address _rewardToken) {
+    constructor(address _rewardToken, address _undead) {
         rewardToken = IERC20(_rewardToken);
+        SpecialToken = IERC20(_undead);
     }
 
-function setStakeToken(address _token)
-    external
-    onlyOwner
-    returns (address _newToken)
-{
-    require(isStakable(_token) == false, "token already stakable");
-    require(IERC20(_token) != rewardToken, "cannot stake reward");
-    require(_token != address(0), "cannot set address zero");
+// function setStakeToken(address _token)
+//     external
+//     returns (address _newToken)
+// {
+//     require(isStakable(_token) == false, "token already stakable");
+//     require(IERC20(_token) != rewardToken, "cannot stake reward");
+//     require(_token != address(0), "cannot set address zero");
 
-    _newToken = address(IERC20(_token));
-    stakableTokens.push(IERC20(_token));
+//     _newToken = address(IERC20(_token));
+//     stakableTokens.push(IERC20(_token));
 
-    // Update the stakeToken for each user who has staked the token
-    for (uint256 i = 0; i < stakableTokens.length; i++) {
-        if (address(stakableTokens[i]) == _token) {
-            User storage _user = user[msg.sender];
-            _user.stakeToken = IERC20(_token);
-        }
-    }
-}
+//     // Update the stakeToken for each user who has staked the token
+//     for (uint256 i = 0; i < stakableTokens.length; i++) {
+//         if (address(stakableTokens[i]) == _token) {
+//             User storage _user = user[msg.sender];
+//             _user.stakeToken = IERC20(_token);
+//         }
+//     }
+// }
 
 
 
@@ -102,12 +104,16 @@ function setStakeToken(address _token)
 
     function calcReward() public view returns (uint256 _reward) {
         User storage _user = user[msg.sender];
-
         uint256 _amount = _user.stakedAmount;
         uint256 _startTime = _user.startTime;
         uint256 duration = block.timestamp - _startTime;
 
-        _reward = (duration * 20 * _amount) / (SECONDS_PER_YEAR * 100);
+            if (_user.stakeToken == SpecialToken) {
+                _reward = ((20 * _amount) / 100);
+            }
+            else{
+                _reward = (duration * 20 * _amount) / (SECONDS_PER_YEAR * 100);
+            }
     }
 
     function claimReward(uint256 amount) public {
