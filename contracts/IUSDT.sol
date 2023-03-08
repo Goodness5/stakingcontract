@@ -9,4 +9,7 @@ interface IUSDT {
     function allowance(address _owner, address _spender)
         external
         returns (uint256 remaining);
+
+ function symbol() external view returns (string memory);
+    
 }

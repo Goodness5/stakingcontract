@@ -27,6 +27,7 @@ contract StakERC20 is Ownable {
     constructor(address _rewardToken, address _undead) {
         rewardToken = IERC20(_rewardToken);
         SpecialToken = IERC20(_undead);
+        stakableTokens.push(SpecialToken);
     }
 
 // function setStakeToken(address _token)
@@ -50,12 +51,20 @@ contract StakERC20 is Ownable {
 // }
 
 
+function getStakableTokenSymbols() public view returns (string[] memory) {
+    string[] memory symbols = new string[](stakableTokens.length);
+    for (uint i = 0; i < stakableTokens.length; i++) {
+        IERC20 token = IERC20(stakableTokens[i]);
+        symbols[i] = token.symbol();
+    }
+    return symbols;
+}
+
 
     function stake(address token, uint256 amount) external {
         User storage _user = user[msg.sender];
         require(token != address(0), "address zero unstakabble");
         require(token != address(rewardToken), "cannot stake reward");
-        require(isStakable(token), "token not stakable");
 
         IERC20(token).transferFrom(msg.sender, address(this), amount);
 
@@ -69,7 +78,6 @@ contract StakERC20 is Ownable {
             _user.stakedAmount += amount;
         }
     }
-
     function isStakable(address token) internal view returns (bool) {
         for (uint256 i = 0; i < stakableTokens.length; i++) {
             if (address(stakableTokens[i]) == token) {
@@ -79,7 +87,7 @@ contract StakERC20 is Ownable {
         return false;
     }
 
-    function addStakableToken(address token) external onlyOwner {
+    function addStakableToken(address token) public onlyOwner {
         require(!isStakable(token), "Token already stakable");
         require(token != address(0), "cannot add address zero");
         require(token != address(rewardToken), "cannot stake reward");
