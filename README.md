@@ -13,7 +13,7 @@ npx hardhat run scripts/deploy.ts
 ```
 
 
-                  # GOERLI_TESTNET:
+# GOERLI_TESTNET:
 
 STAKING_CONTRACT: https://goerli.etherscan.io/address/0xb59335D06DE553729ab8B28C1D3e31976e812F62
 
@@ -23,7 +23,7 @@ REWARD_TOKEN: https://goerli.etherscan.io/address/0xDA5AeaC6d3c89c7De2b2aE7c41A9
 
 
 
-                  # SEPOLIA_TESTNET:
+# SEPOLIA_TESTNET:
 
 STAKING_CONTRACT: https://sepolia.etherscan.io/address/0xADD24771Bcb47b28d85cEfb641ef469bc9E52cf7
 
