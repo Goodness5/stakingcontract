@@ -9,12 +9,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 /// @dev Explain to a developer any extra details
 contract Undead is ERC20, Ownable {
 
-    string  _name;
-    string  _symbol;
-
-    constructor(string memory name, string memory symbol) ERC20(name, symbol) {
-        _name = "Undead";
-        _symbol = "SG";
+    constructor() ERC20("Undead", "SG") {
         _mint(msg.sender, 1000000000);
     }
 

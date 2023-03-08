@@ -19,12 +19,16 @@ async function main() {
   await staking.deployed();
   console.log(`Staking contract deployed to ${staking.address}`);
 
-  // Mock usdt
+  // stakeToken
 
-const stakeTokenaddress = 
+  const USDT = await ethers.getContractFactory("Undead");
+  const usdt = await USDT.deploy();
+  await usdt.deployed();
 
+  const usdtAdress = usdt.address;
+  console.log(`staking Token deployed to ${usdtAdress}`);
 
-  const tokenSet = await staking.setStakeToken(stakeTokenaddress);
+  const tokenSet = await staking.setStakeToken(usdtAdress);
   //   console.log(await tokenSet.wait());
   console.log(`staked Token  ${await staking.stakeToken()}`);
 
