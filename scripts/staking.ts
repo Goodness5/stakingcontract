@@ -6,29 +6,29 @@ async function main() {
 
 
   //deploy reward token
-  const Token = await ethers.getContractFactory("Superman");
-  const token = await Token.deploy("Superman", "SGK");
-  await token.deployed();
+  // const Token = await ethers.getContractFactory("Superman");
+  // const token = await Token.deploy("Superman", "SGK");
+  // await token.deployed();
 
-  const tokenaddress = token.address;
+  // const tokenaddress = token.address;
 
-  console.log(`Reward Token deployed to ${tokenaddress}`);
+  // console.log(`Reward Token deployed to ${tokenaddress}`);
 
   //deloy special token
 
-  const specialtoken = await ethers.getContractFactory("Undead");
-  const SpecialToken = await specialtoken.deploy();
-  await SpecialToken.deployed();
+  // const specialtoken = await ethers.getContractFactory("Undead");
+  // const SpecialToken = await specialtoken.deploy();
+  // await SpecialToken.deployed();
 
-  const undeadAddress = SpecialToken.address;
-  console.log(`undead Token deployed to ${undeadAddress}`);
+  // const undeadAddress = SpecialToken.address;
+  // console.log(`undead Token deployed to ${undeadAddress}`);
 
 
 
   ///deploy Staking contract
 
   const Staking = await ethers.getContractFactory("StakERC20");
-  const staking = await Staking.deploy(tokenaddress, undeadAddress);
+  const staking = await Staking.deploy("0x91d9A24E285f2a59578a43E7b22701AC515D8885", "0x0DB2a8Aa2E2C023Cfb61c617d40162cc9F4c27aB");
   await staking.deployed();
   
   console.log(`Staking contract deployed to ${staking.address}`);
